@@ -66,12 +66,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eggjs/egg-decorator.git"
+    "url": "git+https://github.com/bruce007lee/egg-decorator.git"
   },
   "bugs": {
-    "url": "https://github.com/eggjs/egg/issues"
+    "url": "https://github.com/bruce007lee/egg-decorator/issues"
   },
-  "homepage": "https://github.com/eggjs/egg-decorator#readme",
+  "homepage": "https://github.com/bruce007lee/egg-decorator#readme",
   "author": "bruce007lee",
   "license": "MIT"
 }
