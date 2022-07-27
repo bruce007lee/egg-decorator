@@ -24,39 +24,48 @@
 Description here.
 -->
 
-## Install
+## 依赖说明
 
-```bash
-$ npm i egg-decorator --save
-```
+### 依赖的 egg 版本
 
-## Usage
+egg-decorator 版本 | egg 1.x
+--- | ---
+1.x | 😁
+0.x | ❌
+
+### 依赖的插件
+<!--
+
+如果有依赖其它插件，请在这里特别说明。如
+
+- security
+- multipart
+
+-->
+
+## 开启插件
 
 ```js
-// {app_root}/config/plugin.js
+// config/plugin.js
 exports.decorator = {
   enable: true,
   package: 'egg-decorator',
 };
 ```
 
-## Configuration
+## 使用场景
 
-```js
-// {app_root}/config/config.default.js
-exports.decorator = {
-};
-```
+- Why and What: 描述为什么会有这个插件，它主要在完成一件什么事情。
+尽可能描述详细。
+- How: 描述这个插件是怎样使用的，具体的示例代码，甚至提供一个完整的示例，并给出链接。
 
-see [config/config.default.js](config/config.default.js) for more detail.
+## 详细配置
 
-## Example
+请到 [config/config.default.js](config/config.default.js) 查看详细配置项说明。
 
-<!-- example here -->
+## 提问交流
 
-## Questions & Suggestions
-
-Please open an issue [here](https://github.com/bruce007lee/egg-decorator/issues).
+请到 [egg issues](https://github.com/bruce007lee/egg-decorator/issues) 异步交流。
 
 ## License
 
