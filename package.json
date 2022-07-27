@@ -2,7 +2,7 @@
   "name": "egg-fancy-decorator",
   "version": "1.0.0",
   "description": "Decorator support plugin for egg framework",
-  "main":"lib/index.js",
+  "main": "lib/index.js",
   "types": "index.d.ts",
   "eggPlugin": {
     "name": "fancyDecorator"
@@ -48,6 +48,7 @@
     "cov": "npm run tsc && egg-bin cov",
     "lint": "eslint . --ext .ts --resolve-plugins-relative-to .",
     "tsc": "ets && tsc -p tsconfig.json",
+    "prepare": "husky install",
     "prepublish": "npm run tsc",
     "clean": "ets clean",
     "ci": "npm run tsc && egg-bin pkgfiles --check && npm run lint && npm run cov",
@@ -55,10 +56,9 @@
     "autod": "autod"
   },
   "files": [
-    "app",
-    "config",
-    "typings",
     "lib",
+    "config",
+    "app.js",
     "index.d.ts"
   ],
   "ci": {

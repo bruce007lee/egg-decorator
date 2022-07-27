@@ -9,4 +9,5 @@ package-lock.json
 yarn.lock
 
 # 项目需要忽略的目录
-src/styles/icons/
+**/*.d.ts
+**/*.js

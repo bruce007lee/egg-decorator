@@ -9,6 +9,6 @@ describe('index', async () => {
     await app.ready();
     // const ctx = app.mockContext();
     /* @ts-ignore */
-    assert(app.config.decorator);
+    assert(app.config.fancyDecorator);
   });
 });
