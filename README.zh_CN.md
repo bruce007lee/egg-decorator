@@ -65,7 +65,7 @@ exports.decorator = {
 
 ## 提问交流
 
-请到 [egg issues](https://github.com/bruce007lee/egg-decorator/issues) 异步交流。
+请到 [issues](https://github.com/bruce007lee/egg-decorator/issues) 异步交流。
 
 ## License
 
