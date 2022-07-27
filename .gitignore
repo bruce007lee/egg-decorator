@@ -6,6 +6,7 @@ coverage/
 run/
 .DS_Store
 *.swp
+.github/workflows/nodejs.yml
 
 .nyc_output/
 logs/
