@@ -49,6 +49,7 @@
     "lint": "eslint . --ext .ts --resolve-plugins-relative-to .",
     "tsc": "ets && tsc -p tsconfig.json",
     "prepare": "husky install",
+    "prettier": "prettier --write \"./{lib,config,test}/**/*.{json,ts}\"",
     "prepublish": "npm run tsc",
     "clean": "ets clean",
     "ci": "npm run tsc && egg-bin pkgfiles --check && npm run lint && npm run cov",

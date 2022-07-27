@@ -7,6 +7,8 @@ coverage/
 **/*.min.js
 package-lock.json
 yarn.lock
+run/
+logs/
 
 # 项目需要忽略的目录
 **/*.d.ts
