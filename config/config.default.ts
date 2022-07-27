@@ -1,6 +1,6 @@
 /**
- * egg-decorator default config
+ * egg-fancy-decorator default config
  */
 export default {
-  decorator: {},
+  fancyDecorator: {},
 };

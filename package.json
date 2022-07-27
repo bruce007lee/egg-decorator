@@ -1,11 +1,11 @@
 {
-  "name": "egg-decorator",
+  "name": "egg-fancy-decorator",
   "version": "1.0.0",
   "description": "Decorator support plugin for egg framework",
   "main":"lib/index.js",
   "types": "index.d.ts",
   "eggPlugin": {
-    "name": "decorator"
+    "name": "fancyDecorator"
   },
   "keywords": [
     "egg",
@@ -66,12 +66,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bruce007lee/egg-decorator.git"
+    "url": "git+https://github.com/bruce007lee/egg-fancy-decorator.git"
   },
   "bugs": {
-    "url": "https://github.com/bruce007lee/egg-decorator/issues"
+    "url": "https://github.com/bruce007lee/egg-fancy-decorator/issues"
   },
-  "homepage": "https://github.com/bruce007lee/egg-decorator#readme",
+  "homepage": "https://github.com/bruce007lee/egg-fancy-decorator#readme",
   "author": "bruce007lee",
   "license": "MIT"
 }
