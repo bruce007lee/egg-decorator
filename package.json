@@ -1,6 +1,6 @@
 {
   "name": "egg-fancy-decorator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Decorator support plugin for egg framework",
   "main": "lib/index.js",
   "types": "index.d.ts",
@@ -13,7 +13,8 @@
     "egg-plugin"
   ],
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@eggjs/tsconfig": "^1.0.0",
@@ -47,6 +48,7 @@
     "test-local": "egg-bin test",
     "cov": "npm run tsc && egg-bin cov",
     "lint": "eslint . --ext .ts --resolve-plugins-relative-to .",
+    "build": "npm run tsc",
     "tsc": "ets && tsc -p tsconfig.json",
     "prepare": "husky install",
     "prettier": "prettier --write \"./{lib,config,test}/**/*.{json,ts}\"",

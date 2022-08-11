@@ -1,4 +1,4 @@
-# egg-decorator
+# egg-fancy-decorator
 
 [![NPM version][npm-image]][npm-url]
 [![Test coverage][codecov-image]][codecov-url]
@@ -22,6 +22,9 @@ Some useful decorator for egg framework
 
 - @RequestMapping: use like `@RequestMapping` in `spring-boot`
 - @ResponseBody: use like `@ResponseBody` in `spring-boot`
+- @RequestParam: use like `@RequestParam` in `spring-boot`
+- @RequestQuery: use for get parameter in query
+- @RequestBody: use for get parameter in post body
 
 ## Install
 
@@ -30,6 +33,20 @@ $ npm i egg-fancy-decorator --save
 ```
 
 ## Usage
+
+- Modify `tsconfig.json`, enable decorates for typescript
+
+```json
+// add compilerOptions for enable decorates
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+```
+
+- Modify `{app_root}/config/plugin.js`
 
 ```js
 // {app_root}/config/plugin.js
@@ -62,7 +79,6 @@ export default (app: Application) => {
   router.post('/api/project/find', controller.project.find);
   router.post('/api/project/find2', controller.project.find);
 };
-
 ```
 
 ```typescript
@@ -70,19 +86,24 @@ export default (app: Application) => {
 import { Controller } from 'egg';
 
 export default class TestController extends Controller {
-  
   public async list() {
     const { ctx } = this;
-    ctx.body = await ctx.service.project.list();
+    const { query } = ctx;
+    ctx.body = await ctx.service.project.list({
+      pageSize: query.pageSize,
+      page: query.page,
+    });
   }
 
   public find() {
     const { ctx } = this;
+    const { body } = ctx;
+    const { keyword } = body;
+    console.log(keyword);
     ctx.body = 'test find ' + ctx.request.href;
   }
 }
 ```
-
 
 A simple useage with fancy-decorator plugin decorator (like spring-boot 😀):
 
@@ -90,18 +111,30 @@ A simple useage with fancy-decorator plugin decorator (like spring-boot 😀):
 // controller/test.ts
 // if you use the RequestMapping & ResponseBody, the router config in router.js can be omitted.
 import { Controller } from 'egg';
-import { RequestMapping, ResponseBody, RequestMethod } from 'egg-fancy-decorator';
+import {
+  RequestMapping,
+  ResponseBody,
+  RequestMethod,
+  RequestParam,
+  RequestQuery,
+  RequestBody,
+} from 'egg-fancy-decorator';
 
 export default class TestController extends Controller {
-
   /**
    * A simpe way to define a router path for a controller method
    */
   @RequestMapping('/api/project/list')
   @ResponseBody
-  public async list() {
+  public async list(
+    @RequestParam('pageSize') pageSize: string,
+    @RequestParam('page') page: string,
+    @RequestParam({ value: 'pageSize', valueType: 'number' }) pageSizeNum: number, // Cast to number
+    @RequestQuery() query: any, // Get all query parameters
+  ) {
     const { ctx } = this;
-    return await ctx.service.project.list();
+    console.log(query);
+    return await ctx.service.project.list({ pageSize, page });
   }
 
   /**
@@ -110,7 +143,9 @@ export default class TestController extends Controller {
    */
   @RequestMapping({ value: ['/api/project/find', '/api/project/find2'], method: RequestMethod.POST })
   @ResponseBody
-  public find() {
+  public find(@RequestParam('keyword') keyword: string, @RequestBody() body: any) {
+    console.log(keyword);
+    console.log('post body:', body);
     const { ctx } = this;
     return 'test find ' + ctx.request.href;
   }

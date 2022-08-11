@@ -1,4 +1,4 @@
-# egg-decorator
+# egg-fancy-decorator
 
 [![NPM version][npm-image]][npm-url]
 [![Test coverage][codecov-image]][codecov-url]
@@ -22,7 +22,9 @@ Description here.
 
 - @RequestMapping: 和`spring-boot`中的`@RequestMapping`用法类似
 - @ResponseBody: 和`spring-boot`中的`@ResponseBody`用法类似
-
+- @RequestParam: 和`spring-boot`中的`@RequestParam`用法类似
+- @RequestQuery: 获取 url 中 query 的数据
+- @RequestBody: 获取 post body 中的数据
 
 ## 依赖说明
 
@@ -35,8 +37,22 @@ Description here.
 
 ## 开启插件
 
+- 修改 `tsconfig.json`, 开启 ts 的修饰器支持
+
+```json
+// 添加支持修饰器的编译选项
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  }
+}
+```
+
+- 修改 `{app_root}/config/plugin.js`
+
 ```js
-// config/plugin.js
+// {app_root}/config/plugin.js
 exports.fancyDecorator = {
   enable: true,
   package: 'egg-fancy-decorator',
@@ -66,11 +82,18 @@ import { Controller } from 'egg';
 export default class TestController extends Controller {
   public async list() {
     const { ctx } = this;
-    ctx.body = await ctx.service.project.list();
+    const { query } = ctx;
+    ctx.body = await ctx.service.project.list({
+      pageSize: query.pageSize,
+      page: query.page,
+    });
   }
 
   public find() {
     const { ctx } = this;
+    const { body } = ctx;
+    const { keyword } = body;
+    console.log(keyword);
     ctx.body = 'test find ' + ctx.request.href;
   }
 }
@@ -82,7 +105,14 @@ export default class TestController extends Controller {
 // controller/test.ts
 // 如果你使用 RequestMapping 和 ResponseBody, router.js 中的路由配置可以直接省略。
 import { Controller } from 'egg';
-import { RequestMapping, ResponseBody, RequestMethod } from 'egg-fancy-decorator';
+import {
+  RequestMapping,
+  ResponseBody,
+  RequestMethod,
+  RequestParam,
+  RequestQuery,
+  RequestBody,
+} from 'egg-fancy-decorator';
 
 export default class TestController extends Controller {
   /**
@@ -91,9 +121,15 @@ export default class TestController extends Controller {
    */
   @RequestMapping('/api/project/list')
   @ResponseBody
-  public async list() {
+  public async list(
+    @RequestParam('pageSize') pageSize: string,
+    @RequestParam('page') page: string,
+    @RequestParam({ value: 'pageSize', valueType: 'number' }) pageSizeNum: number, // 转换成number
+    @RequestQuery() query: any, // 获取所有的query参数
+  ) {
     const { ctx } = this;
-    return await ctx.service.project.list();
+    console.log(query);
+    return await ctx.service.project.list({ pageSize, page });
   }
 
   /**
@@ -102,7 +138,9 @@ export default class TestController extends Controller {
    */
   @RequestMapping({ value: ['/api/project/find', '/api/project/find2'], method: RequestMethod.POST })
   @ResponseBody
-  public find() {
+  public find(@RequestParam('keyword') keyword: string, @RequestBody() body: any) {
+    console.log(keyword);
+    console.log('post body:', body);
     const { ctx } = this;
     return 'test find ' + ctx.request.href;
   }
