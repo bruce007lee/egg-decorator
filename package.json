@@ -10,7 +10,8 @@
   "keywords": [
     "egg",
     "eggPlugin",
-    "egg-plugin"
+    "egg-plugin",
+    "decorator"
   ],
   "dependencies": {
     "lodash": "^4.17.21",
