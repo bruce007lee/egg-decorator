@@ -32,7 +32,7 @@ Some useful decorator for egg framework
 $ npm i egg-fancy-decorator --save
 ```
 
-## Usage
+## Configuration
 
 - Modify `tsconfig.json`, enable decorates for typescript
 
@@ -55,15 +55,6 @@ exports.fancyDecorator = {
   package: 'egg-fancy-decorator',
 };
 ```
-
-## Configuration
-
-```js
-// {app_root}/config/config.default.js
-exports.fancyDecorator = {};
-```
-
-see [config/config.default.js](config/config.default.js) for more detail.
 
 ## Example
 
