@@ -357,8 +357,9 @@ export type ResponseJsonOptions = {
  * ~~~
  */
 export const ResponseJson =
-  ({ dataWrapper = defaultDataWrapper, errorWrapper = defaultErrorWrapper }: ResponseJsonOptions): MethodDecorator =>
+  (options?: ResponseJsonOptions): MethodDecorator =>
   (target, name, descriptor: TypedPropertyDescriptor<any>) => {
+    const { dataWrapper = defaultDataWrapper, errorWrapper = defaultErrorWrapper } = options || {};
     const oriValue = descriptor.value;
     descriptor.value = async function (...args) {
       const { ctx } = this as { ctx: Context };
