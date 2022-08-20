@@ -20,8 +20,9 @@ Description here.
 
 为 egg 框架提供一些有用的修饰器
 
-- @RequestMapping: 和`spring-boot`中的`@RequestMapping`用法类似
 - @ResponseBody: 和`spring-boot`中的`@ResponseBody`用法类似
+- @ResponseJson: 和 `@ResponseBody` 类似, 转换 response 为指定的 json 结构
+- @RequestMapping: 和`spring-boot`中的`@RequestMapping`用法类似
 - @RequestParam: 和`spring-boot`中的`@RequestParam`用法类似
 - @RequestQuery: 获取 url 中 query 的数据
 - @RequestBody: 获取 post body 中的数据

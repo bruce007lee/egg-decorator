@@ -20,11 +20,12 @@ Description here.
 
 Some useful decorator for egg framework
 
-- @RequestMapping: use like `@RequestMapping` in `spring-boot`
-- @ResponseBody: use like `@ResponseBody` in `spring-boot`
-- @RequestParam: use like `@RequestParam` in `spring-boot`
-- @RequestQuery: use for get parameter in query
-- @RequestBody: use for get parameter in post body
+- @ResponseBody: Use like `@ResponseBody` in `spring-boot`
+- @ResponseJson: Similar `@RequestBody`, will convert response to format json
+- @RequestMapping: Use like `@RequestMapping` in `spring-boot`
+- @RequestParam: Use like `@RequestParam` in `spring-boot`
+- @RequestQuery: Use for get parameter in query
+- @RequestBody: Use for get parameter in post body
 
 ## Install
 

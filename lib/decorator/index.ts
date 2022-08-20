@@ -312,6 +312,69 @@ export const ResponseBody: MethodDecorator = (target, name, descriptor: TypedPro
   return descriptor;
 };
 
+export type ResponseData<T> = {
+  success?: boolean;
+  errorCode?: string;
+  errorMessage?: string;
+  data?: T;
+};
+
+export const defaultDataWrapper = (data: any): ResponseData<any> => {
+  return {
+    success: true,
+    data,
+  };
+};
+
+export const defaultErrorWrapper = (error: any): ResponseData<any> => {
+  return {
+    success: false,
+    errorMessage: error.message,
+  };
+};
+
+export type ResponseJsonOptions = {
+  /**
+   * 用来转换返回的结果对象到标准的json
+   */
+  dataWrapper?: (data: any) => any;
+  /**
+   * 用来转换错误异常对象到标准的json
+   */
+  errorWrapper?: (error: any) => any;
+};
+
+/**
+ * ResponseJson修饰器, 用于包装返回的json数据
+ * 默认输出的结构为
+ * ~~~typescript
+ * type ResponseData<T> = {
+ *   success?: boolean;
+ *   errorCode?: string;
+ *   errorMessage?: string;
+ *   data?: T;
+ * };
+ * ~~~
+ */
+export const ResponseJson =
+  ({ dataWrapper = defaultDataWrapper, errorWrapper = defaultErrorWrapper }: ResponseJsonOptions): MethodDecorator =>
+  (target, name, descriptor: TypedPropertyDescriptor<any>) => {
+    const oriValue = descriptor.value;
+    descriptor.value = async function (...args) {
+      const { ctx } = this as { ctx: Context };
+      let rs;
+      try {
+        rs = await oriValue.apply(this, args);
+        rs = dataWrapper(rs);
+      } catch (e) {
+        rs = errorWrapper(e);
+      }
+      ctx.body = rs;
+      return rs;
+    };
+    return descriptor;
+  };
+
 /**
  * RequestParam修饰器, 功能类似 spring-boot中的 @RequestParam
  */
