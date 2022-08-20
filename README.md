@@ -38,7 +38,6 @@ $ npm i egg-fancy-decorator --save
 - Modify `tsconfig.json`, enable decorates for typescript
 
 ```json
-// add compilerOptions for enable decorates
 {
   "compilerOptions": {
     "experimentalDecorators": true,

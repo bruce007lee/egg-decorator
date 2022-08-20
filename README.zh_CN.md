@@ -38,10 +38,9 @@ Description here.
 
 ## 开启插件
 
-- 修改 `tsconfig.json`, 开启 ts 的修饰器支持
+- 修改 `tsconfig.json`, 开启 ts 的修饰器支持, 添加支持修饰器的编译选项
 
 ```json
-// 添加支持修饰器的编译选项
 {
   "compilerOptions": {
     "experimentalDecorators": true,
