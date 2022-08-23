@@ -338,8 +338,35 @@ export const defaultErrorWrapper = (error: any): ResponseData<any> => {
   return {
     success: false,
     errorMessage: error.message,
+    errorCode: error.code,
   };
 };
+
+export type ResponseErrorProps =
+  | string
+  | {
+      message: string;
+      code?: string;
+      error?: Error;
+    };
+export class ResponseError implements Error {
+  name: string = 'ResponseError';
+  stack?: string;
+  message: string;
+  code?: string;
+  constructor(props: ResponseErrorProps) {
+    if (typeof props === 'string') {
+      this.message = props;
+    } else {
+      this.message = props.message;
+      this.code = props.code;
+      this.stack = props.error?.stack;
+    }
+  }
+  public toString() {
+    return `${this.name}${this.code ? `(code:${this.code})` : ''}: ${this.message}`;
+  }
+}
 
 export type ResponseJsonOptions = {
   /**
