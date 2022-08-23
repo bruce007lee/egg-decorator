@@ -19,7 +19,7 @@ export const initApp = (app: Application) => {
   initFunctions.forEach((fn) => fn(app));
 };
 
-export type ValueType = 'string' | 'number' | 'boolean' | 'json';
+export type ValueType = 'raw' | 'string' | 'number' | 'boolean' | 'json';
 export type QueryType = 'query' | 'queries';
 
 /**
@@ -59,7 +59,8 @@ export type RequestParamOptions = {
    */
   isRequired?: (value: any) => boolean;
   /**
-   * 参数类型，可做对应的类型转换, 默认是string
+   * 参数类型，可做对应的类型转换, 默认是raw
+   * 注意只有在`isRequired`的条件满足的情况下才会做类型转换
    */
   valueType?: ValueType;
   /**
@@ -96,10 +97,17 @@ const isEmptyArray = (value: any[]) => value == null || value.length <= 0;
 
 const convertType = (value: string, type?: ValueType): any => {
   switch (type) {
+    case 'string': {
+      if (typeof value === 'string') {
+        return value;
+      } else {
+        return value + '';
+      }
+    }
     case 'boolean': {
-      if (value === 'true') {
+      if (value + '' === 'true') {
         return true;
-      } else if (value === 'false') {
+      } else if (value + '' === 'false') {
         return false;
       } else {
         throw new Error('convert type error');

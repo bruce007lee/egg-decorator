@@ -1,6 +1,6 @@
 {
   "name": "egg-fancy-decorator",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Decorator support plugin for egg framework",
   "main": "lib/index.js",
   "types": "index.d.ts",
