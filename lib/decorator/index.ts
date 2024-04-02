@@ -403,7 +403,7 @@ export const ResponseJson =
         rs = await oriValue.apply(this, args);
         rs = dataWrapper(rs);
       } catch (e) {
-        ctx.logger.error(e);
+        ctx.app.logger.error(e);
         rs = errorWrapper(e);
       }
       ctx.body = rs;
